@@ -1,0 +1,10 @@
+.form{
+    width: 700px;
+}
+
+.patt{
+    background-color: #e5e5f7;
+    opacity: 0.3;
+    background-image: radial-gradient(circle at center center, #ca3bcb, #e5e5f7), repeating-radial-gradient(circle at center center, #ca3bcb, #ca3bcb, 4px, transparent 8px, transparent 4px);
+    background-blend-mode: multiply;
+}
