@@ -3,7 +3,7 @@ import './App.css';
 import Navigation from './component/navigation/Navigation';
 import ImageLinkForm from './component/ImageLinkForm/ImageLinkForm';
 import Rank from './component/Rank/Rank';
-import Particless from './component/particles/Particles.js';
+// import Particless from './component/particles/Particles.js';
 import FaceRecognition from './component/FaceRecognition/FaceRecognition';
 import Register from './component/register/register';
 import Signin from './component/signin/signin';
@@ -114,7 +114,7 @@ onRouteChange=(route)=>{
 render(){
   return(
     <div>
-      <Particless className='party' />
+      {/* <Particless className='party' /> */}
       <Navigation isSignIn={this.state.isSignIn} onRouteChange={this.onRouteChange} />
 
       {this.state.route==='Home'?
