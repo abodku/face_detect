@@ -15,7 +15,7 @@ import Signin from './component/signin/signin';
  const initialstate={
   input:'',
   imageUrl:'',
-  box:{},
+  box:[],
   route:'Signin',
   isSignIn:false,
   user:{
@@ -86,16 +86,22 @@ onSubmit=()=>{
 
 
 calculateFaceLocation=(data)=>{
-  const clarifaiFace=data.outputs[0].data.regions[0].region_info.bounding_box
   const image=document.getElementById('inputImage');
   const width=image.width;
   const height=image.height;
-  return {
-    leftCol: clarifaiFace.left_col*width,
-    topRow: clarifaiFace.top_row*height,
-    rightCol:width-(clarifaiFace.right_col*width),
-    bottomRow:height-(clarifaiFace.bottom_row*height)
+  let ans=[];
+  for (let i=0;i<data.outputs[0].data.regions.length;i++){
+    let clarifaiFace=data.outputs[0].data.regions[i].region_info.bounding_box;
+    let ans2={
+      leftCol: clarifaiFace.left_col*width,
+      topRow: clarifaiFace.top_row*height,
+      rightCol:width-(clarifaiFace.right_col*width),
+      bottomRow:height-(clarifaiFace.bottom_row*height),
+      valuePer100:`${Math.floor(data.outputs[0].data.regions[2].value*100)}%`
+    }
+    ans.push(ans2)
   }
+  return ans
 }
 
 displayFaceBox=(box)=>{
