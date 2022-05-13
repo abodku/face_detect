@@ -4,7 +4,7 @@ import './ImageLinkForm.css'
 const ImageLinkForm =({onInputChange,onSubmit})=>{
     return (
         <div>
-            <p className='center f3' >{'Give it a try'} </p>
+            <p className='center f3' ></p>
             <div className='center '>
                 <div className='center patt pa4 br3 shadow-5 form' >
                 <input onChange={onInputChange} className='f4 pa2 w-70 center' type='text'></input>

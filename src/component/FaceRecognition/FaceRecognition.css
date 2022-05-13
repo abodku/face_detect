@@ -12,3 +12,44 @@
     cursor: pointer;
 
 }
+
+.name{
+    font-size: medium;
+    color: #f00;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+    position: absolute;
+    top: 0.1em;
+    left: 0.3em;
+}
+
+.value{
+    font-size: x-small;
+    color: #7703f3;
+    /* padding-top: 0px;
+    margin-top: 0px;*/
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  .flex{
+    display: flex;
+  }
+
+  .frcm{
+    position: relative;
+  }
