@@ -53,3 +53,16 @@ table {
   .frcm{
     position: relative;
   }
+
+  .green{
+    background-color: green;
+  }
+
+  .red{
+    background-color: red;
+  }
+
+  .red p{
+    color: aliceblue;
+    font-size: 0.8em;
+  }

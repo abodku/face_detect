@@ -6,7 +6,7 @@ const FaceRecognitionCM =({imageUrl,box})=>{
     return (
         <div className='center ma flex' >
             <div className='w-60 mt2' >
-                <div className='absolute w-60 frcm' key={'ddd'}>
+                <div className='absolute w-50 frcm' key={'ddd'}>
                     <img id='inputImage' src={imageUrl} alt="here i'll show the image" width='500px' height='auto' ></img>
                     {
                         box.map((user,i)=>{
@@ -24,7 +24,7 @@ const FaceRecognitionCM =({imageUrl,box})=>{
                 </div>
             </div>
             {box.length>0?
-                <table key={'table'} className='w-40 mt2' >
+                <table key={'table'} className='w-50 mt2' >
                     <thead key={'thead'} >
                         <tr key={'tr1'} >
                             <th key={'th0'}>#</th>

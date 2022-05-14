@@ -3,7 +3,6 @@ import './App.css';
 import Navigation from './component/navigation/Navigation';
 import ImageLinkForm from './component/ImageLinkForm/ImageLinkForm';
 import Rank from './component/Rank/Rank';
-// import Clarifai from 'clarifai'
 // import Particless from './component/particles/Particles.js';
 import FaceRecognitionFDM from './component/FaceRecognition/FaceRecognitionFDM';
 import Register from './component/register/register';
@@ -11,7 +10,7 @@ import Signin from './component/signin/signin';
 import SelectWhatDetect from './component/SelectWhatDetect/SelectWhatDetect';
 import FaceRecognitionCM from './component/FaceRecognition/FaceRecognitionCM';
 import ImageRecognitionGM from './component/FaceRecognition/ImageRecognitionGm';
-
+import ImageRecognitionNSFW from './component/FaceRecognition/ImageRecognitionNSFW';
 
 
 
@@ -53,6 +52,25 @@ onInputChange=(event)=>{
   this.setState({input:event.target.value,box:[]})
 }
 
+aditionalSub=(response)=>{
+  if (response){
+    fetch('https://stark-crag-77731.herokuapp.com/image',{
+        method:'put',
+        headers:{
+            'Content-type': 'application/json'
+        },
+        body:JSON.stringify({
+            id:this.state.user.id
+        })
+    })
+        .then(res=>res.json())
+        .then(data=>{
+            this.setState(Object.assign(this.state.user, {entries:data}))
+        })
+        .catch(console.log)
+    }
+}
+
 onSubmitFDM=()=>{
   this.setState({imageUrl:this.state.input})
     fetch('https://stark-crag-77731.herokuapp.com/imageURLFDM',{
@@ -66,29 +84,11 @@ onSubmitFDM=()=>{
           })
           .then(response=>response.json())
           .then(response=>{
-            if (response){
-              fetch('https://stark-crag-77731.herokuapp.com/image',{
-                  method:'put',
-                  headers:{
-                      'Content-type': 'application/json'
-                  },
-                  body:JSON.stringify({
-                      id:this.state.user.id
-                  })
-              })
-                  .then(res=>res.json())
-                  .then(data=>{
-                      this.setState(Object.assign(this.state.user, {entries:data}))
-                  })
-                  .catch(console.log)
-            }
+            this.aditionalSub(response)
       this.displayFaceBox(this.calculateFaceLocationFDM(response))
     })
     .catch(e=>console.log(e))
-
-    console.log(this.state.user.entries)
 }
-
 
 calculateFaceLocationFDM=(data)=>{
   const image=document.getElementById('inputImage');
@@ -108,7 +108,6 @@ calculateFaceLocationFDM=(data)=>{
   return ans
 }
 
-
 onSubmitCM=()=>{
   this.setState({imageUrl:this.state.input})
     fetch('https://stark-crag-77731.herokuapp.com/imageURLCM',{
@@ -122,29 +121,11 @@ onSubmitCM=()=>{
           })
           .then(response=>response.json())
           .then(response=>{
-            if (response){
-              fetch('https://stark-crag-77731.herokuapp.com/image',{
-                  method:'put',
-                  headers:{
-                      'Content-type': 'application/json'
-                  },
-                  body:JSON.stringify({
-                      id:this.state.user.id
-                  })
-              })
-                  .then(res=>res.json())
-                  .then(data=>{
-                      this.setState(Object.assign(this.state.user, {entries:data}))
-                  })
-                  .catch(console.log)
-            }
+            this.aditionalSub(response)
       this.displayFaceBox(this.calculateFaceLocationCM(response))
     })
     .catch(e=>console.log(e))
-
-    console.log(this.state.user.entries)
 }
-
 
 calculateFaceLocationCM=(data)=>{
   const image=document.getElementById('inputImage');
@@ -193,29 +174,11 @@ onSubmitGM=()=>{
           })
           .then(response=>response.json())
           .then(response=>{
-            if (response){
-              fetch('https://stark-crag-77731.herokuapp.com/image',{
-                  method:'put',
-                  headers:{
-                      'Content-type': 'application/json'
-                  },
-                  body:JSON.stringify({
-                      id:this.state.user.id
-                  })
-              })
-                  .then(res=>res.json())
-                  .then(data=>{
-                      this.setState(Object.assign(this.state.user, {entries:data}))
-                  })
-                  .catch(console.log)
-            }
+            this.aditionalSub(response)
       this.displayFaceBox(this.calculateFaceLocationGM(response))
     })
     .catch(e=>console.log(e))
-
-    console.log(this.state.user.entries)
 }
-
 
 calculateFaceLocationGM=(data)=>{
   let ans=[];
@@ -230,6 +193,65 @@ calculateFaceLocationGM=(data)=>{
       ans.push(ans2)
     }
   }
+  return ans
+}
+
+onSubmitFM=()=>{
+  this.setState({imageUrl:this.state.input})
+    fetch('https://stark-crag-77731.herokuapp.com/imageURLFM',{
+              method:'post',
+              headers:{
+                  'Content-type': 'application/json'
+              },
+              body:JSON.stringify({
+                  input:this.state.input
+              })
+          })
+          .then(response=>response.json())
+          .then(response=>{
+            this.aditionalSub(response)
+      this.displayFaceBox(this.calculateFaceLocationGM(response))
+    })
+    .catch(e=>console.log(e))
+}
+
+onSubmitNSFW=()=>{
+  this.setState({imageUrl:this.state.input})
+    fetch('https://stark-crag-77731.herokuapp.com/imageURLNSFW',{
+              method:'post',
+              headers:{
+                  'Content-type': 'application/json'
+              },
+              body:JSON.stringify({
+                  input:this.state.input
+              })
+          })
+          .then(response=>response.json())
+          .then(response=>{
+            this.aditionalSub(response)
+      this.displayFaceBox(this.calculateFaceLocationGM(response))
+    })
+    .catch(e=>console.log(e))
+}
+
+calculateFaceLocationGM=(data)=>{
+  let ans=[];
+  let nsw,sw;
+  const arr=data.outputs[0].data.concepts;
+  for (let i=0;i<arr.length;i++){
+    let valuePer100i=Math.floor(arr[i].value*100);
+    let namei=arr[i].name;
+    if (namei==='nsfw'){
+      nsw=valuePer100i;
+    }else if (namei==='sfw'){
+      sw=valuePer100i;
+    }
+  }
+  let ans2={
+    nsfw:`${nsw}%`,
+    sfw:`${sw}%`
+  }
+  ans.push(ans2)
   return ans
 }
 
@@ -258,7 +280,7 @@ render(){
 
       {this.state.route==='Home'?
       <div>
-        <Rank name={this.state.user.name} entries={this.state.user.entries} />
+        <Rank name={this.state.user.name} box={this.state.box} entries={this.state.user.entries} />
         <SelectWhatDetect swt={this.swt} />
         {this.state.swtd==='FDM'?
           <div>
@@ -275,7 +297,17 @@ render(){
             <ImageLinkForm onSubmit={this.onSubmitGM} onInputChange={this.onInputChange} />
             <ImageRecognitionGM box={this.state.box} imageUrl={this.state.imageUrl} />
           </div>
-        :<p className='center'>please select</p>
+        : this.state.swtd==='FM'?
+          <div>
+            <ImageLinkForm onSubmit={this.onSubmitFM} onInputChange={this.onInputChange} />
+            <ImageRecognitionGM box={this.state.box} imageUrl={this.state.imageUrl} />
+          </div>
+        : this.state.swtd==='NSFW'?
+          <div>
+            <ImageLinkForm onSubmit={this.onSubmitNSFW} onInputChange={this.onInputChange} />
+            <ImageRecognitionNSFW box={this.state.box} imageUrl={this.state.imageUrl} />
+          </div>
+        :<p className='center'>if you don't sure from where to begin, try 'in general' for example</p>
         }
         
       </div>

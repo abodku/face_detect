@@ -10,6 +10,8 @@ const SelectWhatDetect =({swt})=>{
                 <option value={'FDM'} >face detect</option>
                 <option value={'CM'}>celebrity</option>
                 <option value={'GM'}>in general</option>
+                <option value={'FM'}>food</option>
+                <option value={'NSFW'}>NSFW</option>
             </select>
         </div>
     )
