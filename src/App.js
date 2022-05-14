@@ -101,8 +101,7 @@ calculateFaceLocationFDM=(data)=>{
       leftCol: clarifaiFace.left_col*width,
       topRow: clarifaiFace.top_row*height,
       rightCol:width-(clarifaiFace.right_col*width),
-      bottomRow:height-(clarifaiFace.bottom_row*height),
-      valuePer100:`${Math.floor(data.outputs[0].data.regions[2].value*100)}%`
+      bottomRow:height-(clarifaiFace.bottom_row*height)
     }
     ans.push(ans2)
   }
