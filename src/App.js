@@ -38,6 +38,10 @@ constructor(){
   this.state=initialstate;
 }
 
+componentDidMount(){
+  document.title='Detect images'
+}
+
 loadUser=(data)=>{
   this.setState({user:{
     id:data.id,
@@ -229,12 +233,12 @@ onSubmitNSFW=()=>{
           .then(response=>response.json())
           .then(response=>{
             this.aditionalSub(response)
-      this.displayFaceBox(this.calculateFaceLocationGM(response))
+      this.displayFaceBox(this.calculateFaceLocationNSFW(response))
     })
     .catch(e=>console.log(e))
 }
 
-calculateFaceLocationGM=(data)=>{
+calculateFaceLocationNSFW=(data)=>{
   let ans=[];
   let nsw,sw;
   const arr=data.outputs[0].data.concepts;
