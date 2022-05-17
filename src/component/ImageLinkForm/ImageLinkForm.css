@@ -8,3 +8,12 @@
     background-image: radial-gradient(circle at center center, #ca3bcb, #e5e5f7), repeating-radial-gradient(circle at center center, #ca3bcb, #ca3bcb, 4px, transparent 8px, transparent 4px);
     background-blend-mode: multiply;
 }
+
+input{
+    border-radius: 20px;
+}
+
+button{
+    border-radius: 20px;
+}
+

@@ -10,7 +10,11 @@
     -ms-flex-pack: center;
     justify-content: center;
     cursor: pointer;
+    border-radius: 10px;
+}
 
+img{
+  border-radius: 15px;
 }
 
 .name{
@@ -56,13 +60,20 @@ table {
 
   .green{
     background-color: green;
+    border-radius: 10px;
   }
 
   .red{
     background-color: red;
+    border-radius: 10px;
   }
 
   .red p{
+    color: aliceblue;
+    font-size: 0.8em;
+  }
+
+  .green p{
     color: aliceblue;
     font-size: 0.8em;
   }

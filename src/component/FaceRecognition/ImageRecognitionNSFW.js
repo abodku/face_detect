@@ -10,7 +10,20 @@ const ImageRecognitionNSFW =({imageUrl,box})=>{
             </div>
             {box.length>0?
                 <div className=" w-40 mt2">
-                     <div className="w3-container red" style={{width:box[0].nsfw}}><p>NSFW for{box[0].nsfw}</p></div>
+                    {box[0].nsfw===0?
+                        <div className='green' style={{width:box[0].sfw}}>
+                            <p>SFW for {box[0].sfw}</p>
+                        </div>
+                    :
+                        <div>
+                            <div className="w3-container red" style={{width:box[0].nsfw}}>
+                                <p>NSFW for {box[0].nsfw}</p>
+                            </div>
+                            <div className='green' style={{width:box[0].sfw}}>
+                                <p>SFW for {box[0].sfw}</p>
+                            </div>
+                        </div>
+                    }
                 </div>
             :
                     <p className='mt2 w-40' >i didn't recognize anything yet :(</p>
